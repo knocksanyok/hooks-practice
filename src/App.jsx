@@ -50,12 +50,12 @@ function App() {
           count is {count}
         </button>
 
-        <button
-          onClick={() => {
-            setCount2((prev) => prev + 1);
-          }}>
-          count2 is {count2}
-        </button>
+        {/*<button*/}
+        {/*  onClick={() => {*/}
+        {/*    setCount2((prev) => prev + 1);*/}
+        {/*  }}>*/}
+        {/*  count2 is {count2}*/}
+        {/*</button>*/}
 
           {JSON.stringify(todos)}
 
