@@ -1,32 +1,40 @@
-import {useEffect, useLayoutEffect, useState, useCallback} from "react";
+import {useEffect, useMemo, useLayoutEffect, useState, useCallback} from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
+function difficultCountForMemo() {
+    let difficultCount = 0;
+    for (let i = 0; i < 10; i++) {
+        Math.sqrt(i)
+        difficultCount++;
+    }
+    return difficultCount;
+}
+
 function App() {
-  const [count, setCount] = useState(0);
-
     console.log("mount App component")
+    const [count, setCount] = useState(0);
 
+    let difficultCount = useMemo(() => {
+        return difficultCountForMemo();
+    },[])
+
+    const handleClick = useCallback(() => {
+        setCount((prev) => prev + 1);
+    },[setCount]);
 
     useEffect(() => {
-        console.warn('useEffect has been called')
-        const id = setTimeout(() => {
-            alert('YAKF')
-        }, 1000)
+        console.log('MathPI,' + ' ' + difficultCount);
+    },[difficultCount]);
 
-        return () => {
-            clearTimeout(id)
-        }
-    }, [count]);
+
 
   return (
     <>
       <div className="card">
         <button
-          onClick={() => {
-            setCount((prev) => prev + 1);
-          }}>
+          onClick={handleClick}>
           count is {count}
         </button>
       </div>
